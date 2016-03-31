@@ -26,16 +26,16 @@ public class PlayerList {
                 return this.ListOfPlayers.get(playerIndex);
             }
 
-            public String playerNames(PlayerList listOfPlayers)
+           /* public String playerNames(PlayerList listOfPlayers)
             {
                 String playerNames = "it's...us today : \n";
 
                 for ( int x = 0 ; x < listOfPlayers.size() ; x++ )
                     playerNames += "\t\t" + (listOfPlayers.playerAt(x).getName()) + "\n";
                 return playerNames;
-            }
+            }*/
 
-            public void playerInfo(PlayerList listOfPlayers)
+            /*public void playerInfo(PlayerList listOfPlayers)
             {
                 for ( int x = 0 ; x < listOfPlayers.size() ; x++ )
                 {
@@ -48,7 +48,7 @@ public class PlayerList {
 
                     System.out.println(playerStats);
                 }
-            }
+            }*/
 
     }
 

@@ -124,7 +124,7 @@ public class Card {
             return Score;
     }
 
-    public int getAIplayScore(Ranks Rank)
+    /*public int getAIplayScore(Ranks Rank)
     {
 
         int AIplayScore = 0;
@@ -171,9 +171,9 @@ public class Card {
                 break;
         }
 
-        return AIplayScore;
+        return AIplayScore;*/
     }
 
-}
+
 
 

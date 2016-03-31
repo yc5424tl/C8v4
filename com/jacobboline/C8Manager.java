@@ -18,6 +18,9 @@ public class C8Manager
 
         ArrayList<Player> ListOfPlayers = new ArrayList<>();
         PlayerList playerList = new PlayerList(ListOfPlayers);
+        ArrayList<Card> lastCardPlayedAI = new ArrayList<>();
+        Card blankCard = new Card(null, null);
+        lastCardPlayedAI.add(blankCard);
 
         getPlayers(playerList);
         dealCards(playerList, Deck);
@@ -35,7 +38,7 @@ public class C8Manager
 
         //System.out.println( playerList.playerNames(playerList) );
 
-        startGame(playerList, Deck);
+        startGame(playerList, Deck, lastCardPlayedAI);
         //didn't print the first time, but i also added it when the code was running
         System.out.println("Thanks for playing!");
     }
@@ -67,8 +70,11 @@ public class C8Manager
             passCounter = 0;
         }
 
-        if (passCounter == playerList.size()) allPlayersPass = true;
-        else allPlayersPass = false;
+        allPlayersPass = passCounter == playerList.size();
+        //above was suggested by intellij
+        //previous is :
+        // if (passCounter == playerList.size()) allPlayersPass = true;
+        //else allPlayersPass = false;
 
         return allPlayersPass;
     }
@@ -85,7 +91,7 @@ public class C8Manager
 
 
 
-    private static void startGame(PlayerList playerList, CardDeck deck) {
+    private static void startGame(PlayerList playerList, CardDeck deck, ArrayList<Card> lastCardPlayedList) {
 
 
         CardDeck drawPileDeck = new CardDeck();
@@ -105,7 +111,7 @@ public class C8Manager
             for (int p = 0 % playerList.size(); p < playerList.size(); p++) {
                 if (p == playerList.size() - 1) {
                     Player AI = playerList.playerAt(playerList.size() - 1);
-                    int AIpassOrNot = AI.computerLogic(AI, drawPileDeck, discardPileDeck);
+                    int AIpassOrNot = AI.computerLogic(AI, drawPileDeck, discardPileDeck, lastCardPlayedList);
                     if (AIpassOrNot == 1) passCounterInt++;
                     else passCounterInt = 0;
                 }
@@ -142,7 +148,7 @@ public class C8Manager
         //AtomicBoolean keepPlaying = new AtomicBoolean();
         for (int p2 = 0; p2 < pList.size() - 1; p2++) {
             Player playerToCheck = pList.playerAt(p2);
-            System.out.println("Handcheck result for " + playerToCheck.getName() + " is " + (playerToCheck.getHandSize() != 0));
+            //System.out.println("Handcheck result for " + playerToCheck.getName() + " is " + (playerToCheck.getHandSize() != 0));
             if (playerToCheck.getHandSize() == 0) keepPlaying = false;
             //if (playerToCheck.getHandSize() == 0 ? false : true) keepPlaying = true;
             //else keepPlaying = false;
@@ -209,10 +215,10 @@ public class C8Manager
 
             System.out.println
             (
-                  "Welcome to Crazy8s!\n"
-                + "You'll be playing against the computer.\n"
-                + "How many HUMANS will be STRUGGLING today?\n"
-                + "Please Enter 1, 2, or 3."
+                  "Welcome to Crazy8s!\n\n"
+                + "You'll be playing against me, HAL! The computer!\n\n"
+                + "How many HUMANS will be STRUGGLING today?\n\n"
+                + "Please Enter 1, 2, or 3.\n\n"
             );
 
 

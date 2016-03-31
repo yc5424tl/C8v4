@@ -36,11 +36,11 @@ public  class CardDeck {
             this.DeckOfCards.clear();
         }
 
-        public void removeCardAtIndex(int IndexValue)
+      /*  public void removeCardAtIndex(int IndexValue)
         {
             this.DeckOfCards.remove(IndexValue);
-        }
-        public void deckInfo()
+        }*/
+        /*public void deckInfo()
         {
             System.out.printf
             (
@@ -54,16 +54,16 @@ public  class CardDeck {
             {
                 System.out.println(card.getFullCard(card));
             }
-        }
+        }*/
 
         public void shuffle()
         {
-            System.out.printf
+            /*System.out.printf
             (
                 "This decks' size is : %d\n "
                 + "And contains the following cards"
                 + " :%n", this.DeckOfCards.size()
-            );
+            );*/
 
 
             /*for (Card card : this.DeckOfCards)
@@ -71,13 +71,13 @@ public  class CardDeck {
                 System.out.println(card.getFullCard(card));
             }*/
 
-            System.out.println
+           /* System.out.println
             (
                 "\n\n\n"
                 + "Now we will shuffle the deck, "
                 + "which has the size of "
                 + this.DeckOfCards.size()
-            );
+            );*/
 
             Collections.shuffle(this.DeckOfCards);
 
@@ -101,12 +101,12 @@ public  class CardDeck {
             return this.DeckOfCards.size();
         }
 
-        public void cardsRemainingCount()
+        /*public void cardsRemainingCount()
         {
             int deckSizeInt = this.DeckOfCards.size();
             String deckSize = "The number of remaining cards is : " + deckSizeInt;
             System.out.println(deckSize);
-        }
+        }*/
 
         public void addCard(Card card)
         {
@@ -129,11 +129,11 @@ public  class CardDeck {
             Card card = this.DeckOfCards.get(0);
             discardPile.addCard(card);
             this.DeckOfCards.remove(card);
-            System.out.println
+            /*System.out.println
             (
                 "The top card of the Discard Pile is a : \n"
                  + card.getFullCard(card)
-            );
+            );*/
         }
 
         public Card topOfDrawPile()

@@ -56,7 +56,7 @@ public class Player {
 
     public void setScore(int newScore)
     {
-        this.Score = newScore;
+        this.Score += newScore;
     }
 
    // public void getCard(int x)
@@ -114,7 +114,7 @@ public class Player {
     {
         int returnInt = 0;
         int cardIndex = 0;
-        System.out.println(player.getHandInfo());
+        //System.out.println(player.getHandInfo());
         ArrayList<Card> playerChoice = new ArrayList<>();
 
         for (Card card : this.Hand)
@@ -125,11 +125,11 @@ public class Player {
         }
 
         System.out.println("\n\nIt is " + player.getName() + "'s turn!");
-        System.out.println(
+        /*System.out.println(
                 "Player and Game Info : \n"
                 + "Hand Info : " +player.getHandInfo()
                 + "\n DrawPile.toString() and size : " + drawPile.toString() + drawPile.size()
-                + "\n Discard Pile Size : " + discardPile.size());
+                + "\n Discard Pile Size : " + discardPile.size());*/
 
 
             try
@@ -152,11 +152,15 @@ public class Player {
             "\n\nEnter 0 (Zero) to select : %%s" +
             " from the discard pile%%n"), topDiscardInfo
             );*/
+        System.out.println
+        (
+            "The top of the Discard Pile is : "
+            + discardPile.getCard(0).getFullCard(discardPile.getCard(0)) + "\n\n"
+        );
+
 
 
         int choice = 1;
-
-
         for (Card cardChosen : playerChoice)
         {
             System.out.println("Enter " + choice + " to select : " + cardChosen.getFullCard(cardChosen));
@@ -180,13 +184,13 @@ public class Player {
         try
         {
 
-            if ((playersChoiceInt < 0) || (playersChoiceInt > this.Hand.size() + 2))
+            if ((playersChoiceInt < 1) || (playersChoiceInt > this.Hand.size() + 2))
             {
                 System.out.println("Your selection needs to be an integer from the menu!");
                 player.takeTurn(player, discardPile, drawPile);
             }
 
-            if (playersChoiceInt == 0)
+            /*if (playersChoiceInt == 0)
             {
                 String cardPlayed = discardPile.getCard(0).getFullCard(discardPile.getCard(0));
                 this.Hand.add(discardPile.topOfDrawPile());
@@ -206,7 +210,7 @@ public class Player {
                 System.out.println("Card removed, top of discard pile is now a : " + discardPile.getCard(0).getFullCard(discardPile.getCard(0)));
 
                  return returnInt;
-            }
+            }*/
 
             if (playersChoiceInt == this.Hand.size() + 1)
             {
@@ -419,7 +423,7 @@ public class Player {
                             player.getName()
                             + " played : "
                             + cardChosen.getFullCard(cardChosen)
-                            + " from their hand!"
+                            + " from their hand! \n\n"
                         );
 
                         discardPile.addCard(cardChosen);
@@ -465,13 +469,13 @@ public class Player {
 
 
 
-    public int computerLogic(Player AI, CardDeck drawPile, CardDeck discardPile) {
+    public int computerLogic(Player AI, CardDeck drawPile, CardDeck discardPile, ArrayList<Card> lastCardList) {
     //TODO the for loop ATM would go through every card in the AI hand, and make a play, should use a do/while loop to break it after a card is played
             Card topOfDiscardPile = discardPile.topOfDrawPile();
             ArrayList<Card> eightsInHand = new ArrayList<>();
             ArrayList<Card> sameSuitInHand = new ArrayList<>();
             ArrayList<Card> sameRankInHand = new ArrayList<>();
-            Card lastCardPlayed = new Card (null, null);
+            //Card lastCardPlayed = new Card (null, null);
             int returnInt = 0;
             //AtomicReference<Card> cardToPlay = new AtomicReference<>(new Card(null, null));
 
@@ -499,11 +503,13 @@ public class Player {
             Card cardToPlay1;
             Collections.shuffle(sameRankInHand);
             cardToPlay1 = sameRankInHand.get(0);
-            System.out.println("Last card AI player : " + lastCardPlayed.getFullCard(lastCardPlayed));
-            lastCardPlayed = cardToPlay1;
-            System.out.println("After AI play, Last card is : " + lastCardPlayed.getFullCard(lastCardPlayed));
+            System.out.println("Last card AI player : " + lastCardList.get(0).getFullCard(lastCardList.get(0)));
+            //lastCardPlayed = cardToPlay1;
             cardToPlay1.AIplayInfo();
             discardPile.addCard(cardToPlay1);
+            lastCardList.remove(0);
+            lastCardList.add(cardToPlay1);
+            System.out.println("After AI play, Last card is : " + lastCardList.get(0).getFullCard(lastCardList.get(0)));
             //System.out.println("A before playing a card : " + AI.getHandInfo());
             AI.Hand.remove(cardToPlay1);
             return returnInt;
@@ -525,10 +531,12 @@ public class Player {
                 }
             }
             Card cardFromSuitHand = sameSuitInHand.get(indexOfHighestRankedCard);
-            System.out.println("Last card AI player : " + lastCardPlayed.getFullCard(lastCardPlayed));
-            lastCardPlayed = cardFromSuitHand;
-            System.out.println("After AI play, Last card is : " + lastCardPlayed.getFullCard(lastCardPlayed));
+            System.out.println("Last card AI player : " + lastCardList.get(0).getFullCard(lastCardList.get(0)));
+            //lastCardPlayed = cardFromSuitHand;
             discardPile.addCard(cardFromSuitHand);
+            lastCardList.remove(0);
+            lastCardList.add(cardFromSuitHand);
+            System.out.println("After AI play, Last card is : " + lastCardList.get(0).getFullCard(lastCardList.get(0)));
             cardFromSuitHand.AIplayInfo();
             //System.out.println("A before playing a card : " + AI.getHandInfo());
             AI.Hand.remove(cardFromSuitHand);
@@ -545,18 +553,50 @@ public class Player {
             //Random random = new Random();
             Card.Suits[] suitsForAn8 = new Card.Suits[]{Card.Suits.Clubs, Card.Suits.Diamonds, Card.Suits.Hearts, Card.Suits.Spades};
             ArrayList<Card.Suits> suitsForAn8List = new ArrayList<>();
+
+
+
+
             Collections.addAll(suitsForAn8List, suitsForAn8);
+
+                System.out.println("SuitsForAn 8 contains : " + suitsForAn8List.size());
+                for (Card.Suits suit : suitsForAn8List) {
+                    System.out.println(suit.toString());
+                }
+
+                System.out.println("Result of topOfDiscardPile.getSuit().toString() : "
+                        + topOfDiscardPile.getSuit().toString());
+
             suitsForAn8List.remove(topOfDiscardPile.getSuit());
+
+                System.out.println("SuitsForAn 8 contains : " + suitsForAn8List.size());
+                for (Card.Suits suit : suitsForAn8List)
+                {
+                System.out.println(suit.toString());
+                }
+
             cardToPlay.setRank(Card.Ranks.Eight);
             //Card.Suits suitFor8 = suitsForAn8List.get(random.nextInt(0 - suitsForAn8List.size()));
             Collections.shuffle(suitsForAn8List);
+
+                System.out.println("After shuffle : ");
+
+                System.out.println("SuitsForAn 8 contains : " + suitsForAn8List.size());
+                for (Card.Suits suit : suitsForAn8List)
+                {
+                    System.out.println(suit.toString());
+                }
+
             cardToPlay.setSuit(suitsForAn8List.get(0));
             suitsForAn8List.add(topOfDiscardPile.getSuit()); //added back to avoid "illegal-argument-exception bound must be positive"
             cardToPlay.AIplayInfo();
-            System.out.println("Last card AI player : " + lastCardPlayed.getFullCard(lastCardPlayed));
-            lastCardPlayed = cardToPlay;
-            System.out.println("After AI play, Last card is : " + lastCardPlayed.getFullCard(lastCardPlayed));
+            System.out.println("Last card AI player : " + lastCardList.get(0).getFullCard(lastCardList.get(0)));
+            //lastCardPlayed = cardToPlay;
+            //System.out.println("After AI play, Last card is : " + lastCardList.get(0).getFullCard(lastCardList.get(0)));
             discardPile.addCard(cardToPlay);
+            lastCardList.remove(0);
+            lastCardList.add(cardToPlay);
+            System.out.println("After AI play, Last card is : " + lastCardList.get(0).getFullCard(lastCardList.get(0)));
 
             //System.out.println("A before playing a card : " + AI.getHandInfo());
             AI.Hand.remove(cardToPlay);
@@ -575,7 +615,7 @@ public class Player {
         else
         {
 
-            if ((discardPile.getCard(0).getRank() != Card.Ranks.Eight) && (discardPile.getCard(0) != lastCardPlayed))
+            /*if ((discardPile.getCard(0).getRank() != Card.Ranks.Eight) && (discardPile.getCard(0) != lastCardPlayed))
             {
                 Card cardFromDiscard = discardPile.getCard(0);
                 AI.Hand.add(cardFromDiscard);
@@ -587,7 +627,7 @@ public class Player {
 
             }
             else
-            {
+            {*/
                 if (drawPile.size() != 0)
                 {
                     Card cardFromDrawPile = drawPile.topOfDrawPile();
@@ -639,7 +679,7 @@ public class Player {
 
     }
 
-    }
+
 
 
 
