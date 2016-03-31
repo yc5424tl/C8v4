@@ -107,7 +107,8 @@ public class C8Manager
             int passCounterInt = 0;
             //if (passCounter == playerList.size()) passCounter(passCounter, playerList);
 
-
+            //TODO This format allows for the loop to finish even if one player has extinguished their cards
+            //I should combine the takeTurn/AIlogic along with the first if/else below of the passOrNot method
             for (int p = 0 % playerList.size(); p < playerList.size(); p++) {
                 if (p == playerList.size() - 1) {
                     Player AI = playerList.playerAt(playerList.size() - 1);
