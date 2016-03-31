@@ -24,14 +24,16 @@ public class DrawPile {
         }
 
         public void addAll(CardDeck deck)
-    {
-        int deckSize = deck.size();
-        for ( int x = 0; x < deckSize; x++ ) {
-            Card card = deck.getCard(x);
-            this.drawPileObject.add(card);
-        }
+        {
+            int deckSize = deck.size();
 
-    }
+            for ( int x = 0; x < deckSize; x++ )
+            {
+                Card card = deck.getCard(x);
+                this.drawPileObject.add(card);
+            }
+
+        }
 
         public void showTopCard()
         {
@@ -45,4 +47,5 @@ public class DrawPile {
             String Size = "The number of remaining cards in the draw pile is : " + deckSizeInt;
             System.out.println(Size);
         }
-}
+
+    }
