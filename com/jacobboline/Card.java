@@ -81,48 +81,48 @@ public class Card {
 
                 case Two:
                     Score = 2;
-
-                    break;
+                    return Score;
                 case Three:
                     Score = 3;
-                    break;
+                    return Score;
                 case Four:
                     Score = 4;
-                    break;
+                    return Score;
                 case Five:
                     Score = 5;
-                    break;
+                    return Score;
                 case Six:
                     Score = 6;
-                    break;
+                    return Score;
                 case Seven:
                     Score = 7;
-                    break;
+                    return Score;
                 case Eight:
                     Score = 50;
-                    break;
+                    return Score;
                 case Nine:
                     Score = 9;
-                    break;
+                    return Score;
                 case Ten:
                     Score = 10;
-                    break;
+                    return Score;
                 case Jack:
                     Score = 10;
-                    break;
+                    return Score;
                 case Queen:
                     Score = 10;
-                    break;
+                    return Score;
                 case King:
                     Score = 10;
-                    break;
+                    return Score;
                 case Ace:
                     Score = 10;
-                    break;
+                    return Score;
+
             }
 
             return Score;
-    }
+        }
 
     /*public int getAIplayScore(Ranks Rank)
     {

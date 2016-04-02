@@ -3,11 +3,9 @@ package com.jacobboline;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class C8Manager
-{
+public class C8Manager {
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         /*if(args.length == 0)
         {
             System.out.println("Proper Usage is: java program filename");
@@ -27,33 +25,19 @@ public class C8Manager
 
         System.out.println("Alright..., looks like, uh, well... ");
 
-            try
-            {
-                Thread.sleep(1000);
-            }
-            catch(InterruptedException ex)
-            {
-                Thread.currentThread().interrupt();
-            }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
 
         //System.out.println( playerList.playerNames(playerList) );
 
         startGame(playerList, Deck, lastCardPlayedAI);
         //didn't print the first time, but i also added it when the code was running
-        System.out.println("Thanks for playing!");
+        System.out.println("Let's take a look here....");
+        getScores(playerList);
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     private static boolean passCounter(int playResult, PlayerList playerList) //don't need to account for an empty draw pile since players cannot pass if there are cards left in it
@@ -61,12 +45,9 @@ public class C8Manager
         boolean allPlayersPass; //= false;
         int passCounter = 0;
 
-        if (playResult == 1)
-        {
+        if (playResult == 1) {
             passCounter++;
-        }
-        else
-        {
+        } else {
             passCounter = 0;
         }
 
@@ -78,17 +59,6 @@ public class C8Manager
 
         return allPlayersPass;
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
     private static void startGame(PlayerList playerList, CardDeck deck, ArrayList<Card> lastCardPlayedList) {
@@ -115,9 +85,7 @@ public class C8Manager
                     int AIpassOrNot = AI.computerLogic(AI, drawPileDeck, discardPileDeck, lastCardPlayedList);
                     if (AIpassOrNot == 1) passCounterInt++;
                     else passCounterInt = 0;
-                }
-                else
-                {
+                } else {
                     Player playerUp = playerList.playerAt(p);
                     int passOrNot = playerUp.takeTurn(playerUp, discardPileDeck, drawPileDeck);
 
@@ -126,22 +94,15 @@ public class C8Manager
                     else passCounterInt = 0;
                 }
 
-                if (!passCounter(passCounterInt, playerList))
-                {
+                if (!passCounter(passCounterInt, playerList)) {
                     continue;
-                }
-                else
-                {
+                } else {
                     passCounterBoolean = false;
                 }
             }
         }
         while ((handCheck(playerList)) && (passCounterBoolean));
     }
-
-
-
-
 
 
     private static boolean handCheck(PlayerList pList) {
@@ -167,106 +128,151 @@ public class C8Manager
                 "The dealCards function has been called\n"
                 + "Deck before 'dealing : "
             );*/
-            //deck.deckInfo();
+        //deck.deckInfo();
 
-            System.out.println("Shuffling cards here...without fingers. One sec!");
-            int numberOfCardsToDeal;
-            if (playerList.size() == 2) numberOfCardsToDeal = 7;
-            else numberOfCardsToDeal = 5;
-            ArrayList<Card> cardsToRemove = new ArrayList<>();
-            int indexOfCard = 0;
-            int x = 0;
+        System.out.println("Shuffling cards here...without fingers. One sec!");
+        int numberOfCardsToDeal;
+            /*if (playerList.size() == 2) numberOfCardsToDeal = 7;
+            else numberOfCardsToDeal = 5;*/
+        if (playerList.size() == 2) numberOfCardsToDeal = 2;
+        else numberOfCardsToDeal = 2;
+        ArrayList<Card> cardsToRemove = new ArrayList<>();
+        int indexOfCard = 0;
+        int x = 0;
 
-            while (x < playerList.size())
-            {
+        while (x < playerList.size()) {
 
-                Player player = playerList.playerAt(x);
+            Player player = playerList.playerAt(x);
 
-                    for (int y = 0; y < numberOfCardsToDeal; y++)
-                    {
-                        Card cardToDeal = deck.getCard(indexOfCard);
-                        player.addCard(cardToDeal);
-                        cardsToRemove.add(cardToDeal);
-                        indexOfCard += 1;
-                    }
-                x++;
+            for (int y = 0; y < numberOfCardsToDeal; y++) {
+                Card cardToDeal = deck.getCard(indexOfCard);
+                player.addCard(cardToDeal);
+                cardsToRemove.add(cardToDeal);
+                indexOfCard += 1;
             }
+            x++;
+        }
 
-            deck.removeDealtCards(cardsToRemove);
+        deck.removeDealtCards(cardsToRemove);
             /*System.out.println
             (
                 "The removeDealtCards function has been called from within dealCards\n"
                 + "The effects are : \n"
             );*/
-            //deck.deckInfo();
-        }
-
-
-
-
-
-
-
-
+        //deck.deckInfo();
+    }
 
 
     public static void getPlayers(PlayerList pList) {
 
-            Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-            System.out.println
-            (
-                  "Welcome to Crazy8s!\n\n"
-                + "You'll be playing against me, HAL! The computer!\n\n"
-                + "How many HUMANS will be STRUGGLING today?\n\n"
-                + "Please Enter 1, 2, or 3.\n\n"
-            );
+        System.out.println
+                (
+                        "Welcome to Crazy8s!\n\n"
+                                + "You'll be playing against me, HAL! The computer!\n\n"
+                                + "How many HUMANS will be STRUGGLING today?\n\n"
+                                + "Please Enter 1, 2, or 3.\n\n"
+                );
 
 
+        int numPlayers = scanner.nextInt();
+        while (numPlayers < 1 || numPlayers > 3) {
+            scanner.hasNextInt();
+        }
+        if (numPlayers < 1 || numPlayers > 3)
 
-            int numPlayers = scanner.nextInt();
-            while (numPlayers < 1 || numPlayers > 3)
-            {
-                scanner.hasNextInt();
-            }
-            if (numPlayers < 1 || numPlayers > 3)
+        {
+            System.out.println("Please Enter a Valid Selection");
+            scanner.nextInt();
+        }
 
-            {
-                System.out.println("Please Enter a Valid Selection");
-                scanner.nextInt();
-            }
+        for (int p = 0; p < numPlayers; p++) {
+            System.out.println("Please enter the name of the player to add.");
+            String playerName = scanner.next();
 
-            for (int p = 0; p < numPlayers; p++)
-            {
-                System.out.println("Please enter the name of the player to add.");
-                String playerName = scanner.next();
-
-                if (playerName == null)
-                {
-                    System.out.println
-                    (
-                        "You know the phrase, 'What's in a name?'"
-                        +"\n I tell ya, it ain't nothin'!"
-                        +"\n Enter a valid name HUMAN."
-                    );
-                    playerName = scanner.next();
-                }
-
-                Player newPlayer = new Player();
-                newPlayer.setName(playerName);
-                ArrayList<Card> hand = new ArrayList<>();
-                newPlayer.setHand(hand);
-                newPlayer.setScore(0);
-                pList.addPlayer(newPlayer);
-
+            if (playerName == null) {
+                System.out.println
+                        (
+                                "You know the phrase, 'What's in a name?'"
+                                        + "\n I tell ya, it ain't nothin'!"
+                                        + "\n Enter a valid name HUMAN."
+                        );
+                playerName = scanner.next();
             }
 
-            Player AI = new Player();
-            AI.setName("HAL");
+            Player newPlayer = new Player();
+            newPlayer.setName(playerName);
             ArrayList<Card> hand = new ArrayList<>();
-            AI.setHand(hand);
-            AI.setScore(0);
-            pList.addPlayer(AI);
+            newPlayer.setHand(hand);
+            newPlayer.setBaseScore();
+            pList.addPlayer(newPlayer);
+
+        }
+
+        Player AI = new Player();
+        AI.setName("HAL");
+        ArrayList<Card> hand = new ArrayList<>();
+        AI.setHand(hand);
+        AI.setBaseScore();
+        pList.addPlayer(AI);
+
+    }
+
+    public static void getScores(PlayerList pList) {
+        //Integer currentBest = 0;
+        ArrayList<Integer> pScores = new ArrayList<>();
+        ArrayList<String> pNames = new ArrayList<>();
+
+
+        for (int p = 0; p < pList.size(); p++) {
+            System.out.println("Player info : " + (pList.playerAt(p).getHandInfo()));
+
+            System.out.println("For getScores 'for' loop, pList size is : " + pList.size());
+            Player player = pList.playerAt(p);
+            System.out.println("Player : " + player.getName());
+
+
+            int thisScore = player.setScore();
+            int scorePlacement = 0;
+            //System.out.println("Player.getScore() : " + player.getScore()); putting player.getscore in string caused it to run, doubling the score
+            System.out.println("Integer.getInteger(String.valueOf(thisScore) : " + Integer.getInteger(String.valueOf(thisScore)));
+            Integer scoreAsInt = thisScore;
+
+            //Integer asInt = Integer.getInteger(String.valueOf(thisScore));
+           /* System.out.println("Integer of score = " + scoreAsInt.toString());
+            System.out.println("Integer of score w/out string cast : " + scoreAsInt);*/
+
+
+            if (!pScores.isEmpty()) {
+                System.out.println("Iterating through scores to find placement");
+                //Integer asInt = Integer.getInteger(String.valueOf(thisScore));
+                for (Integer score : pScores) if (scoreAsInt > score) scorePlacement++;
+                pScores.add(scorePlacement, scoreAsInt);
+                pNames.add(scorePlacement, player.getName());
+            } else pScores.add(scorePlacement, scoreAsInt);
+        }
+
+        System.out.println
+        (
+            "The winner of all things good in the world is "
+            + pNames.get(0).toUpperCase() + "!!!\n"
+            + "With an astounding, yet fitting, score of : " + pScores.get(0).toString() + "!!!"
+        );
+
+        for (int x = 1; x < pNames.size() -1 ; x++) {
+            if (pScores.get(x).equals(pScores.get(0))) {
+                System.out.println(
+                        "BUT WAIT! BEHOLD, AN EQUAL!"
+                                + pNames.get(x) + " SHATTERS THE CURRENT REALITY WITH A SCORE OF "
+                                + pScores.get(x) + "!!!");
+            } else {
+                System.out.println(
+                        "Somehow still not having left in shame : "
+                                + pNames.get(x) + "!!!\n" + "With a score of : "
+                                + pScores.get(x).toString() + "!!!");
+            }
+        }
 
     }
 }

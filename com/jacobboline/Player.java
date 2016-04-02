@@ -49,14 +49,26 @@ public class Player {
         this.Hand.remove(card);
     }*/
 
-    public int getScore()
+    public int setScore()
     {
+        System.out.println("Is this players hand empty : " + this.Hand.isEmpty());
+        if(this.Hand.isEmpty()) this.Score = 0;
+        else for (Card card : this.Hand) {
+            System.out.println("Adding to score : " + card.getScore(card.getRank()));
+            this.Score += card.getScore(card.getRank());
+        }
         return this.Score;
     }
 
-    public void setScore(int newScore)
+    public void setBaseScore()
     {
-        this.Score += newScore;
+        this.Score = 0;
+    }
+
+
+    public int getScore()
+    {
+        return this.Score;
     }
 
    // public void getCard(int x)
@@ -91,7 +103,7 @@ public class Player {
         else
         {
         System.out.println("That play is not valid, try again.\n\n");
-        takeTurn(player, discardPile, drawPileDeck);
+        //takeTurn(player, discardPile, drawPileDeck);
         return false;
         }
     }
@@ -250,168 +262,164 @@ public class Player {
             {
                 Card cardChosen = this.Hand.get(playersChoiceInt - 1);
 
-                if (cardChosen.getRank() == Card.Ranks.Eight)
-                try
-                {
-                    System.out.printf
-                    (
-                            "You've played an eight!\n " +
-                            "Please select the suit for play : \n" +
-                            "1 : Clubs    \n" +
-                            "2 : Diamonds \n" +
-                            "3 : Hearts   \n" +
-                            "4 : Spades   \n" +
-                            "%n"
-                    );
+                if (cardChosen.getRank() == Card.Ranks.Eight) {
+                    try {
+                        System.out.printf
+                                (
+                                        "You've played an eight!\n " +
+                                                "Please select the suit for play : \n" +
+                                                "1 : Clubs    \n" +
+                                                "2 : Diamonds \n" +
+                                                "3 : Hearts   \n" +
+                                                "4 : Spades   \n" +
+                                                "%n"
+                                );
 
-                    Scanner switchScanner = new Scanner(System.in);
+                        Scanner switchScanner = new Scanner(System.in);
 
-                    int switchSelection = switchScanner.nextInt();
+                        int switchSelection = switchScanner.nextInt();
 
-                    while (switchSelection > 4 || 1 > switchSelection) switchScanner.hasNextInt();
+                        while (switchSelection > 4 || 1 > switchSelection) switchScanner.hasNextInt();
 
-                    switch (switchSelection)
-                    {
-                    case 1:
+                        switch (switchSelection) {
+                            case 1:
 
-                            System.out.println(
-                                    "Card for suit selection : "
-                                    + cardChosen.getFullCard(cardChosen));
+                                System.out.println(
+                                        "Card for suit selection : "
+                                                + cardChosen.getFullCard(cardChosen));
 
-                            cardChosen.setSuit(Card.Suits.Clubs);
+                                cardChosen.setSuit(Card.Suits.Clubs);
 
-                            System.out.println(
-                                    "Card after 'club' suit selection : "
-                                    + cardChosen.getFullCard(cardChosen));
+                                System.out.println(
+                                        "Card after 'club' suit selection : "
+                                                + cardChosen.getFullCard(cardChosen));
 
-                            Card cardFromDiscardPile = discardPile.topOfDrawPile();
+                                Card cardFromDiscardPile = discardPile.topOfDrawPile();
 
-                            System.out.println(
-                                    "Discard pile top before card added : "
-                                    + cardFromDiscardPile.getFullCard(cardFromDiscardPile));
+                                System.out.println(
+                                        "Discard pile top before card added : "
+                                                + cardFromDiscardPile.getFullCard(cardFromDiscardPile));
 
-                            discardPile.addCard(cardChosen);
+                                discardPile.addCard(cardChosen);
 
-                            Card cardToDiscardPile = discardPile.topOfDrawPile();
+                                Card cardToDiscardPile = discardPile.topOfDrawPile();
 
-                            System.out.println(
-                                    "After card added : "
-                                    + cardFromDiscardPile.getFullCard(cardToDiscardPile));
+                                System.out.println(
+                                        "After card added : "
+                                                + cardFromDiscardPile.getFullCard(cardToDiscardPile));
 
-                            player.Hand.remove(cardChosen);
+                                player.Hand.remove(cardChosen);
 
-                            System.out.println(
-                                    player.getName() + " played " +
-                                    cardChosen.getFullCard(cardChosen) + "!\n");
-                            return returnInt;
+                                System.out.println(
+                                        player.getName() + " played " +
+                                                cardChosen.getFullCard(cardChosen) + "!\n");
+                                return returnInt;
 
 
-                    case 2:
-                            System.out.println(
-                                    "Card for suit selection : "
-                                    + cardChosen.getFullCard(cardChosen));
+                            case 2:
+                                System.out.println(
+                                        "Card for suit selection : "
+                                                + cardChosen.getFullCard(cardChosen));
 
-                            cardChosen.setSuit(Card.Suits.Diamonds);
+                                cardChosen.setSuit(Card.Suits.Diamonds);
 
-                            System.out.println(
-                                    "Card after 'diamond' suit selection : "
-                                    + cardChosen.getFullCard(cardChosen));
+                                System.out.println(
+                                        "Card after 'diamond' suit selection : "
+                                                + cardChosen.getFullCard(cardChosen));
 
-                            Card cardFromDiscardPile1 = discardPile.topOfDrawPile();
+                                Card cardFromDiscardPile1 = discardPile.topOfDrawPile();
 
-                            System.out.println(
-                                    "Discard pile top before card added : "
-                                    + cardFromDiscardPile1.getFullCard(cardFromDiscardPile1));
+                                System.out.println(
+                                        "Discard pile top before card added : "
+                                                + cardFromDiscardPile1.getFullCard(cardFromDiscardPile1));
 
-                            discardPile.addCard(cardChosen);
+                                discardPile.addCard(cardChosen);
 
-                            Card cardToDiscardPile1 = discardPile.topOfDrawPile();
+                                Card cardToDiscardPile1 = discardPile.topOfDrawPile();
 
-                            System.out.println(
-                                    "After card added : "
-                                    + cardToDiscardPile1.getFullCard(cardToDiscardPile1));
+                                System.out.println(
+                                        "After card added : "
+                                                + cardToDiscardPile1.getFullCard(cardToDiscardPile1));
 
-                            player.Hand.remove(cardChosen);
+                                player.Hand.remove(cardChosen);
 
-                            System.out.println(
-                                    player.getName() + " played " +
-                                    cardChosen.getFullCard(cardChosen) + "!\n");
-                            return returnInt;
-
-
-                    case 3:
-                            System.out.println(
-                                    "Card for suit selection : "
-                                    + cardChosen.getFullCard(cardChosen));
-
-                            cardChosen.setSuit(Card.Suits.Hearts);
-
-                            System.out.println(
-                                    "Card after 'heart' suit selection : "
-                                    + cardChosen.getFullCard(cardChosen));
-
-                            Card cardFromDiscardPile2 = discardPile.topOfDrawPile();
-
-                            System.out.println(
-                                    "Discard pile top before card added : " +
-                                    cardFromDiscardPile2.getFullCard(cardFromDiscardPile2));
-
-                            discardPile.addCard(cardChosen);
-
-                            Card cardToDiscardPile2 = discardPile.topOfDrawPile();
-
-                            System.out.println(
-                                    "After card added : "
-                                    + cardToDiscardPile2.getFullCard(cardToDiscardPile2));
-
-                            player.Hand.remove(cardChosen);
-
-                            System.out.println(
-                                    player.getName() + " played " +
-                                    cardChosen.getFullCard(cardChosen) + "!\n");
-                            return returnInt;
+                                System.out.println(
+                                        player.getName() + " played " +
+                                                cardChosen.getFullCard(cardChosen) + "!\n");
+                                return returnInt;
 
 
-                    case 4:
-                            System.out.println(
-                                    "Card for suit selection : "
-                                    + cardChosen.getFullCard(cardChosen));
+                            case 3:
+                                System.out.println(
+                                        "Card for suit selection : "
+                                                + cardChosen.getFullCard(cardChosen));
 
-                            cardChosen.setSuit(Card.Suits.Spades);
+                                cardChosen.setSuit(Card.Suits.Hearts);
 
-                            System.out.println(
-                                    "Card after 'spade' suit selection : "
-                                    + cardChosen.getFullCard(cardChosen));
+                                System.out.println(
+                                        "Card after 'heart' suit selection : "
+                                                + cardChosen.getFullCard(cardChosen));
 
-                            Card cardFromDiscardPile3 = discardPile.topOfDrawPile();
+                                Card cardFromDiscardPile2 = discardPile.topOfDrawPile();
 
-                            System.out.println(
-                                    "Discard pile top before card added : " +
-                                    cardFromDiscardPile3.getFullCard(cardFromDiscardPile3));
+                                System.out.println(
+                                        "Discard pile top before card added : " +
+                                                cardFromDiscardPile2.getFullCard(cardFromDiscardPile2));
 
-                            discardPile.addCard(cardChosen);
+                                discardPile.addCard(cardChosen);
 
-                            Card cardToDiscardPile3 = discardPile.topOfDrawPile();
+                                Card cardToDiscardPile2 = discardPile.topOfDrawPile();
 
-                            System.out.println(
-                                    "After card added : "
-                                    + cardToDiscardPile3.getFullCard(cardToDiscardPile3));
+                                System.out.println(
+                                        "After card added : "
+                                                + cardToDiscardPile2.getFullCard(cardToDiscardPile2));
 
-                            player.Hand.remove(cardChosen);
+                                player.Hand.remove(cardChosen);
 
-                            System.out.println(
-                                    player.getName() + " played " +
-                                    cardChosen.getFullCard(cardChosen) + "!\n");
-                            return returnInt;
+                                System.out.println(
+                                        player.getName() + " played " +
+                                                cardChosen.getFullCard(cardChosen) + "!\n");
+                                return returnInt;
 
+
+                            case 4:
+                                System.out.println(
+                                        "Card for suit selection : "
+                                                + cardChosen.getFullCard(cardChosen));
+
+                                cardChosen.setSuit(Card.Suits.Spades);
+
+                                System.out.println(
+                                        "Card after 'spade' suit selection : "
+                                                + cardChosen.getFullCard(cardChosen));
+
+                                Card cardFromDiscardPile3 = discardPile.topOfDrawPile();
+
+                                System.out.println(
+                                        "Discard pile top before card added : " +
+                                                cardFromDiscardPile3.getFullCard(cardFromDiscardPile3));
+
+                                discardPile.addCard(cardChosen);
+
+                                Card cardToDiscardPile3 = discardPile.topOfDrawPile();
+
+                                System.out.println(
+                                        "After card added : "
+                                                + cardToDiscardPile3.getFullCard(cardToDiscardPile3));
+
+                                player.Hand.remove(cardChosen);
+
+                                System.out.println(
+                                        player.getName() + " played " +
+                                                cardChosen.getFullCard(cardChosen) + "!\n");
+                                return returnInt;
+
+                        }
+
+                    } catch (InputMismatchException ime) {
+                        System.out.println("Please choose a valid play!");
+                        takeTurn(player, discardPile, drawPile);
                     }
-
-                }
-
-                catch (InputMismatchException ime)
-                {
-                    System.out.println("Please choose a valid play!");
-                    takeTurn(player, discardPile, drawPile);
                 }
 
                 else
@@ -538,7 +546,7 @@ public class Player {
             lastCardList.add(cardFromSuitHand);
             System.out.println("After AI play, Last card is : " + lastCardList.get(0).getFullCard(lastCardList.get(0)));
             cardFromSuitHand.AIplayInfo();
-            //System.out.println("A before playing a card : " + AI.getHandInfo());
+            //System.out.println("A before playwing a card : " + AI.getHandInfo());
             AI.Hand.remove(cardFromSuitHand);
             return returnInt;
 
@@ -599,7 +607,7 @@ public class Player {
             System.out.println("After AI play, Last card is : " + lastCardList.get(0).getFullCard(lastCardList.get(0)));
 
             //System.out.println("A before playing a card : " + AI.getHandInfo());
-            AI.Hand.remove(cardToPlay);
+            AI.Hand.remove(eightsInHand.get(0));
             return returnInt;
             //System.out.println("A after  playing a card : " + AI.getHandInfo());
 
@@ -632,7 +640,8 @@ public class Player {
                 {
                     Card cardFromDrawPile = drawPile.topOfDrawPile();
                     AI.Hand.add(cardFromDrawPile);
-                    cardFromDrawPile.AIplayInfo();
+                    //cardFromDrawPile.AIplayInfo();
+                    System.out.println("Well...I suppose I could draw a card...");
                     drawPile.removeCard(cardFromDrawPile);
                     return returnInt;
                 }
