@@ -2,8 +2,6 @@ package com.jacobboline;
 
 public class Card {
 
-
-
     public enum Suits
     {
         Clubs,
@@ -65,15 +63,11 @@ public class Card {
 
         public void AIplayInfo ()
         {
-            System.out.println("BEHOLD : I HAVE CHOSEN TO PLAY MY MIGHTY : " + this.getFullCard(this));
+            System.out.println("BEHOLD, I HAVE CHOSEN TO PLAY THE MIGHTY " + this.getFullCard(this) + "\n\n");
         }
-
-
-
 
         public int getScore(Ranks Rank)
         {
-
             int Score = 0;
 
             switch (Rank)
@@ -123,55 +117,6 @@ public class Card {
 
             return Score;
         }
-
-    /*public int getAIplayScore(Ranks Rank)
-    {
-
-        int AIplayScore = 0;
-
-        switch (Rank)
-
-        {
-
-            case Two:
-                AIplayScore = 2;
-                break;
-            case Three:
-                AIplayScore = 3;
-                break;
-            case Four:
-                AIplayScore = 4;
-                break;
-            case Five:
-                AIplayScore = 5;
-                break;
-            case Six:
-                AIplayScore = 6;
-                break;
-            case Seven:
-                AIplayScore = 7;
-                break;
-            case Nine:
-                AIplayScore = 8;
-                break;
-            case Ten:
-                AIplayScore = 9;
-                break;
-            case Jack:
-                AIplayScore = 10;
-                break;
-            case Queen:
-                AIplayScore = 11;
-                break;
-            case King:
-                AIplayScore = 12;
-                break;
-            case Ace:
-                AIplayScore = 13;
-                break;
-        }
-
-        return AIplayScore;*/
     }
 
 

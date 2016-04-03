@@ -1,7 +1,6 @@
 package com.jacobboline;
 
 import java.util.*;
-//import java.util.concurrent.atomic.AtomicReference;
 
 public class Player {
 
@@ -31,7 +30,7 @@ public class Player {
         return this.Name;
     }
 
-    public String getHandInfo()
+    public String getHandInfo() //used for testing game play features against input
     {
         String cardString = "***************\n"
                             + this.getName()
@@ -49,17 +48,11 @@ public class Player {
         this.Hand.add(card);
     }
 
-    /*public void playCard(Card card)
-    {
-        this.Hand.remove(card);
-    }*/
-
     public int setScore()
     {
-        System.out.println("Is this players hand empty : " + this.Hand.isEmpty());
+
         if(this.Hand.isEmpty()) this.Score = 0;
         else for (Card card : this.Hand) {
-            System.out.println("Adding to score : " + card.getScore(card.getRank()));
             this.Score += card.getScore(card.getRank());
         }
         return this.Score;
@@ -75,19 +68,6 @@ public class Player {
     {
         return this.Score;
     }
-
-   // public void getCard(int x)
-    /*TODO there is a note on get card while loop in block comment below this
-    can i use this to end the do/while loop...ie this.getCard == null/exception
-    * if this is placed at the end of the do loop, it should break?
-    * the alternative in mind is this :
-    * if : for player in player list :
-    * if player.hand == empty : return/break
-    * this would then move to the next function within c8man, which would calculate the scores.
-    */
-    /*{
-        this.Hand.get(x);
-    }*/
 
     public int getHandSize()
     {
