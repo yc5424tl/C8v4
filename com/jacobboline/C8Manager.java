@@ -100,8 +100,8 @@ public class C8Manager {
 
         System.out.println("Shuffling cards here...without fingers. One sec!");
         int numberOfCardsToDeal;
-        if (playerList.size() == 2) numberOfCardsToDeal = 2;
-        else numberOfCardsToDeal = 2;
+        if (playerList.size() == 2) numberOfCardsToDeal = 7
+        else numberOfCardsToDeal = 5
         ArrayList<Card> cardsToRemove = new ArrayList<>();
         int indexOfCard = 0;
         int x = 0;
